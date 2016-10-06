@@ -3,6 +3,7 @@
 namespace Pbmedia\ScoreMatcher;
 
 use Countable;
+use Illuminate\Support\Collection;
 use Pbmedia\ScoreMatcher\AttributeScore;
 use Pbmedia\ScoreMatcher\Interfaces\Attribute;
 use Pbmedia\ScoreMatcher\Interfaces\Score;
@@ -10,6 +11,11 @@ use Pbmedia\ScoreMatcher\Interfaces\Score;
 class Specifications implements Countable
 {
     protected $specifications = [];
+
+    public function __construct()
+    {
+        $this->specifications = new Collection;
+    }
 
     public function add(AttributeScore $attributeScore)
     {
@@ -27,23 +33,23 @@ class Specifications implements Countable
     {
         $key = $attribute->getIdentifier();
 
-        return isset($this->specifications[$key]);
+        return $this->specifications->has($key);
     }
 
     public function get(Attribute $attribute): AttributeScore
     {
         $key = $attribute->getIdentifier();
 
-        return $this->specifications[$key] ?? null;
+        return $this->specifications->get($key);
     }
 
-    public function getAll(): array
+    public function all(): Collection
     {
         return $this->specifications;
     }
 
     public function count(): int
     {
-        return count($this->specifications);
+        return $this->specifications->count();
     }
 }

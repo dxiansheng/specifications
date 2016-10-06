@@ -72,7 +72,7 @@ class MatcherTest extends \PHPUnit_Framework_TestCase
 
         $scores = $matcher->getScoresByAttribute(new TestCapacityInGBAttribute);
 
-        $this->assertEquals([128, 256, 512], $scores);
+        $this->assertEquals([128, 256, 512], $scores->toArray());
     }
 
     public function testNormalizedScoresByAttribute()
@@ -81,7 +81,7 @@ class MatcherTest extends \PHPUnit_Framework_TestCase
 
         $scores = $matcher->getNormalizedScoresByAttribute(new TestCapacityInGBAttribute);
 
-        $this->assertEquals([0.25, 0.5, 1], $scores);
+        $this->assertEquals([0.25, 0.5, 1], $scores->toArray());
     }
 
     public function testGetMatchingScoreOf256CapacitySSD()
@@ -95,7 +95,7 @@ class MatcherTest extends \PHPUnit_Framework_TestCase
 
         $matchingScore = $matcher->getMatchingScoreByAttributeScore($scoreAttribute);
 
-        $this->assertEquals([0.75, 1, 0.5], $matchingScore);
+        $this->assertEquals([0.75, 1, 0.5], $matchingScore->toArray());
     }
 
     public function testGetDisksSortedByMatch()

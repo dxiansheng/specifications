@@ -2,6 +2,7 @@
 
 namespace Pbmedia\ScoreMatcher;
 
+use Illuminate\Support\Collection;
 use Pbmedia\ScoreMatcher\Interfaces\Attribute;
 use Pbmedia\ScoreMatcher\Interfaces\CanBeSpecified;
 use Pbmedia\ScoreMatcher\Specifications;
@@ -10,13 +11,14 @@ class Matcher implements CanBeSpecified
 {
     use HasSpecifications;
 
-    protected $candidates = [];
+    protected $candidates;
 
     protected $criteria;
 
     public function __construct()
     {
-        $this->criteria = new Specifications;
+        $this->criteria   = new Specifications;
+        $this->candidates = new Collection;
     }
 
     public function criteria(): Specifications
@@ -26,82 +28,72 @@ class Matcher implements CanBeSpecified
 
     public function addCandidate(CanBeSpecified $candidate)
     {
-        $this->candidates[] = $candidate;
+        $this->candidates->push($candidate);
     }
 
-    public function getCandidates(): array
+    public function getCandidates(): Collection
     {
         return $this->candidates;
     }
 
-    public function getScoresByAttribute(Attribute $attribute): array
+    public function getScoresByAttribute(Attribute $attribute): Collection
     {
-        return array_map(function ($candidate) use ($attribute) {
+        return $this->candidates->map(function ($candidate) use ($attribute) {
             $attributeScore = $candidate->specifications()->get($attribute);
 
             return $attributeScore ? $attributeScore->getScoreValue() : null;
-        }, $this->candidates);
+        });
     }
 
-    public function getNormalizedScoresByAttribute(Attribute $attribute): array
+    public function getNormalizedScoresByAttribute(Attribute $attribute): Collection
     {
         $scores = $this->getScoresByAttribute($attribute);
 
-        $max = max($scores);
+        $max = $scores->max();
 
-        return array_map(function ($score) use ($max) {
+        return $scores->map(function ($score) use ($max) {
             return is_null($score) ? null : ($score / $max);
-        }, $scores);
+        });
     }
 
-    public function getMatchingScoreByAttributeScore(AttributeScore $attributeScore): array
+    public function getMatchingScoreByAttributeScore(AttributeScore $attributeScore): Collection
     {
         $attribute  = $attributeScore->getAttribute();
         $scoreValue = $attributeScore->getScoreValue();
 
         $scores = $this->getScoresByAttribute($attribute);
 
-        $normalizedScores = $this->getNormalizedScoresByAttribute($attribute);
+        $scoreToCompareTo = $scoreValue / $scores->max();
 
-        $scoreToCompareTo = $scoreValue / max($scores);
-
-        return array_map(function ($normalizedScore) use ($scoreToCompareTo) {
+        return $this->getNormalizedScoresByAttribute($attribute)->map(function ($normalizedScore) use ($scoreToCompareTo) {
             if ($normalizedScore === null) {
                 return null;
             }
 
             return 1 - abs($normalizedScore - $scoreToCompareTo);
-        }, $normalizedScores);
+        });
     }
 
-    public function get(): array
+    public function get(): Collection
     {
         $scores = [];
 
-        foreach ($this->criteria()->getAll() as $attributeScore) {
-            foreach ($this->getMatchingScoreByAttributeScore($attributeScore) as $key => $score) {
+        foreach ($this->criteria()->all() as $attributeScore) {
+            $this->getMatchingScoreByAttributeScore($attributeScore)->each(function ($score, $key) use (&$scores) {
                 if (!isset($scores[$key])) {
                     $scores[$key] = 0;
                 }
 
                 $scores[$key] += $score;
-            }
+            });
         }
 
-        $candidates = $this->candidates;
-
-        array_walk($candidates, function (&$candidate, $key) use ($scores) {
+        return $this->getCandidates()->map(function ($candidate) use ($scores) {
             $score = $scores[$key];
 
             $candidate = compact('candidate', 'score');
+        })->sortBy('score')->map(function ($candidateWithScore) {
+            return $candidateWithScore['candidate'];
         });
-
-        usort($candidates, function ($a, $b) {
-            return $b['score'] <=> $a['score'];
-        });
-
-        return array_map(function ($candidate) {
-            return $candidate['candidate'];
-        }, $candidates);
     }
 }
