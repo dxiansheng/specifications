@@ -7,7 +7,7 @@ use Pbmedia\ScoreMatcher\TestCacheInGBAttribute;
 use Pbmedia\ScoreMatcher\TestCapacityInGBAttribute;
 use Pbmedia\ScoreMatcher\TestSizeInGBScore;
 
-class SpecificationTest extends \PHPUnit_Framework_TestCase
+class SpecificationsTest extends \PHPUnit_Framework_TestCase
 {
     public function testAddAttributeScore()
     {
