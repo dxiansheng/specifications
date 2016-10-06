@@ -111,5 +111,11 @@ class MatcherTest extends \PHPUnit_Framework_TestCase
             new TestCacheInGBAttribute,
             new TestSizeInGBScore(1.25)
         ));
+
+        $disks = $matcher->get();
+
+        $this->assertEquals(512, $disks->get(0)->specifications()->get(new TestCapacityInGBAttribute)->getScoreValue());
+        $this->assertEquals(256, $disks->get(1)->specifications()->get(new TestCapacityInGBAttribute)->getScoreValue());
+        $this->assertEquals(128, $disks->get(2)->specifications()->get(new TestCapacityInGBAttribute)->getScoreValue());
     }
 }

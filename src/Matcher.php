@@ -78,22 +78,24 @@ class Matcher implements CanBeSpecified
     {
         $scores = [];
 
-        foreach ($this->criteria()->all() as $attributeScore) {
-            $this->getMatchingScoreByAttributeScore($attributeScore)->each(function ($score, $key) use (&$scores) {
-                if (!isset($scores[$key])) {
-                    $scores[$key] = 0;
+        $this->criteria()->all()->map(function (AttributeScore $attributeScore) {
+            return $this->getMatchingScoreByAttributeScore($attributeScore);
+        })->each(function ($matchingScoreByAttributeScore) use (&$scores) {
+            $matchingScoreByAttributeScore->each(function ($score, $productKey) use (&$scores) {
+                if (!isset($scores[$productKey])) {
+                    $scores[$productKey] = 0;
                 }
 
-                $scores[$key] += $score;
+                $scores[$productKey] += $score;
             });
-        }
-
-        return $this->getCandidates()->map(function ($candidate) use ($scores) {
-            $score = $scores[$key];
-
-            $candidate = compact('candidate', 'score');
-        })->sortBy('score')->map(function ($candidateWithScore) {
-            return $candidateWithScore['candidate'];
         });
+
+        return $this->getCandidates()->map(function (CanBeSpecified $candidate, $productKey) use ($scores) {
+            $score = $scores[$productKey];
+
+            return compact('candidate', 'score');
+        })->sortByDesc('score')->map(function ($candidateWithScore): CanBeSpecified {
+            return $candidateWithScore['candidate'];
+        })->values();
     }
 }
