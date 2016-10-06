@@ -13,7 +13,7 @@ class Specifications implements Countable
 
     public function add(AttributeScore $attributeScore)
     {
-        $key = get_class($attributeScore->getAttribute());
+        $key = $attributeScore->getAttribute()->getIdentifier();
 
         $this->specifications[$key] = $attributeScore;
     }
@@ -25,16 +25,21 @@ class Specifications implements Countable
 
     public function has(Attribute $attribute): bool
     {
-        $key = get_class($attribute);
+        $key = $attribute->getIdentifier();
 
         return isset($this->specifications[$key]);
     }
 
     public function get(Attribute $attribute): AttributeScore
     {
-        $key = get_class($attribute);
+        $key = $attribute->getIdentifier();
 
         return $this->specifications[$key] ?? null;
+    }
+
+    public function getAll(): array
+    {
+        return $this->specifications;
     }
 
     public function count(): int
