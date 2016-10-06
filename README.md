@@ -11,14 +11,13 @@
 Via Composer
 
 ``` bash
-$ composer require Pbmedia/ScoreMatcher
+$ composer require pbmedia/score-matcher
 ```
 
 ## Usage
 
 ``` php
-$skeleton = new League\Skeleton();
-echo $skeleton->echoPhrase('Hello, League!');
+// soon...!
 ```
 
 ## Change log
