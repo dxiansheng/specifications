@@ -1,6 +1,6 @@
 <?php
 
-namespace Pbmedia\ScoreMatcher\Integration;
+namespace Pbmedia\ScoreMatcher;
 
 use Pbmedia\ScoreMatcher\Specifications;
 use Pbmedia\ScoreMatcher\TestSSD;

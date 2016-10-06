@@ -23,21 +23,21 @@ class Specifications implements Countable
         $this->add(new AttributeScore($attribute, $score));
     }
 
-    public function has(Attribute $attribute)
+    public function has(Attribute $attribute): bool
     {
         $key = get_class($attribute);
 
         return isset($this->specifications[$key]);
     }
 
-    public function get(Attribute $attribute)
+    public function get(Attribute $attribute): AttributeScore
     {
         $key = get_class($attribute);
 
         return $this->specifications[$key] ?? null;
     }
 
-    public function count()
+    public function count(): int
     {
         return count($this->specifications);
     }
