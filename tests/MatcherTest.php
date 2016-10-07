@@ -102,12 +102,12 @@ class MatcherTest extends \PHPUnit_Framework_TestCase
     {
         $matcher = $this->getMatcherWithThreeSSDs();
 
-        $matcher->criteria()->add(new AttributeScore(
+        $matcher->specifications()->add(new AttributeScore(
             new TestCapacityInGBAttribute,
             new TestSizeInGBScore(384)
         ));
 
-        $matcher->criteria()->add(new AttributeScore(
+        $matcher->specifications()->add(new AttributeScore(
             new TestCacheInGBAttribute,
             new TestSizeInGBScore(1.25)
         ));

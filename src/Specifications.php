@@ -10,7 +10,7 @@ use Pbmedia\ScoreMatcher\Interfaces\Score;
 
 class Specifications implements Countable
 {
-    protected $specifications = [];
+    protected $specifications;
 
     public function __construct()
     {

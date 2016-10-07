@@ -13,17 +13,9 @@ class Matcher implements CanBeSpecified
 
     protected $candidates;
 
-    protected $criteria;
-
     public function __construct()
     {
-        $this->criteria   = new Specifications;
         $this->candidates = new Collection;
-    }
-
-    public function criteria(): Specifications
-    {
-        return $this->criteria;
     }
 
     public function addCandidate(CanBeSpecified $candidate)
@@ -78,7 +70,7 @@ class Matcher implements CanBeSpecified
     {
         $scores = [];
 
-        $this->criteria()->all()->map(function (AttributeScore $attributeScore) {
+        $this->specifications()->all()->map(function (AttributeScore $attributeScore) {
             return $this->getMatchingScoreByAttributeScore($attributeScore);
         })->each(function ($matchingScoreByAttributeScore) use (&$scores) {
             $matchingScoreByAttributeScore->each(function ($score, $productKey) use (&$scores) {
