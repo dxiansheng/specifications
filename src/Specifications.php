@@ -7,8 +7,9 @@ use Illuminate\Support\Collection;
 use Pbmedia\ScoreMatcher\AttributeScore;
 use Pbmedia\ScoreMatcher\Interfaces\Attribute;
 use Pbmedia\ScoreMatcher\Interfaces\Score;
+use Pbmedia\ScoreMatcher\Interfaces\Specifications as SpecificationsInterface;
 
-class Specifications implements Countable
+class Specifications implements SpecificationsInterface, Countable
 {
     protected $specifications;
 
