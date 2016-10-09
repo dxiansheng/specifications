@@ -44,6 +44,13 @@ class Specifications implements SpecificationsInterface, Countable
         return $this->specifications->get($key);
     }
 
+    public function forget(Attribute $attribute)
+    {
+        $key = $attribute->getIdentifier();
+
+        $this->specifications->forget($key);
+    }
+
     public function all(): Collection
     {
         return $this->specifications;

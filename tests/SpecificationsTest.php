@@ -77,4 +77,15 @@ class SpecificationsTest extends \PHPUnit_Framework_TestCase
         $specifications->set($capacity, new TestSizeInGBScore(256));
         $this->assertEquals(256, $specifications->get($capacity)->getScoreValue());
     }
+
+    public function testForgettingAttributeScore()
+    {
+        $capacity = new TestCapacityInGBAttribute;
+
+        $specifications = new Specifications;
+        $specifications->set($capacity, new TestSizeInGBScore(128));
+        $specifications->forget($capacity);
+
+        $this->assertCount(0, $specifications);
+    }
 }

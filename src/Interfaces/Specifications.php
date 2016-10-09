@@ -17,6 +17,8 @@ interface Specifications
 
     public function get(Attribute $attribute): AttributeScore;
 
+    public function forget(Attribute $attribute);
+
     public function all(): Collection;
 
     public function count(): int;
