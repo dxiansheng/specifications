@@ -11,6 +11,8 @@ interface Specifications
 {
     public function add(AttributeScore $attributeScore);
 
+    public function addMany(array $attributeScores = []);
+
     public function set(Attribute $attribute, Score $score);
 
     public function has(Attribute $attribute): bool;

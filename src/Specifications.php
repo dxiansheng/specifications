@@ -25,6 +25,13 @@ class Specifications implements SpecificationsInterface, Countable
         $this->specifications[$key] = $attributeScore;
     }
 
+    public function addMany(array $attributeScores = [])
+    {
+        Collection::make($attributeScores)->each(function (AttributeScore $attributeScore) {
+            $this->add($attributeScore);
+        });
+    }
+
     public function set(Attribute $attribute, Score $score)
     {
         $this->add(new AttributeScore($attribute, $score));

@@ -25,6 +25,21 @@ class SpecificationsTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(1, $specifications);
     }
 
+    public function testAddManyAttributeScores()
+    {
+        $specifications = new Specifications;
+
+        $specifications->addMany([
+            new AttributeScore($cacheAttribute = new TestCacheInGBAttribute, new TestSizeInGBScore(0.5)),
+            new AttributeScore($capacityAttribute = new TestCapacityInGBAttribute, new TestSizeInGBScore(128)),
+        ]);
+
+        $this->assertTrue($specifications->has($cacheAttribute));
+        $this->assertTrue($specifications->has($capacityAttribute));
+
+        $this->assertCount(2, $specifications);
+    }
+
     public function testSetAttributeScore()
     {
         $attribute = new TestCapacityInGBAttribute;
