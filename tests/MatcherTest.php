@@ -118,4 +118,28 @@ class MatcherTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(256, $disks->get(1)->specifications()->get(new TestCapacityInGBAttribute)->getScoreValue());
         $this->assertEquals(128, $disks->get(2)->specifications()->get(new TestCapacityInGBAttribute)->getScoreValue());
     }
+
+    public function testWithoutScores()
+    {
+        $unknownSSD = new TestSSD;
+        $normalSSD  = new TestSSD;
+
+        $matcher = new Matcher;
+        $matcher->addCandidates($unknownSSD, $normalSSD);
+        $matcher->specifications()->set(new TestCapacityInGBAttribute, new TestSizeInGBScore(64));
+
+        $disks = $matcher->get();
+
+        $this->assertCount(2, $disks);
+        $this->assertEquals($unknownSSD, $disks->get(0));
+        $this->assertEquals($normalSSD, $disks->get(1));
+    }
+
+    public function testWithoutSpecifications()
+    {
+        $matcher = new Matcher;
+        $matcher->addCandidates($disks = [new TestSSD, new TestSSD, new TestSSD]);
+
+        $this->assertEquals($disks, $matcher->get()->toArray());
+    }
 }

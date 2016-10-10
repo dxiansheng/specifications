@@ -18,9 +18,22 @@ class Matcher implements CanBeSpecified
         $this->candidates = new Collection;
     }
 
-    public function addCandidate(CanBeSpecified $candidate)
+    public function addCandidate(CanBeSpecified $candidate): Matcher
     {
         $this->candidates->push($candidate);
+
+        return $this;
+    }
+
+    public function addCandidates($candidates): Matcher
+    {
+        $candidates = is_array($candidates) ? $candidates : func_get_args();
+
+        Collection::make($candidates)->each(function ($candidate) {
+            $this->addCandidate($candidate);
+        });
+
+        return $this;
     }
 
     public function getCandidates(): Collection
@@ -59,6 +72,12 @@ class Matcher implements CanBeSpecified
 
         $scores = $this->getScoresByAttribute($attribute);
 
+        if (!$scores->max()) {
+            return $this->candidates->map(function () {
+                return 0;
+            });
+        }
+
         $scoreToCompareTo = $scoreValue / $scores->max();
 
         return $this->getNormalizedScoresByAttribute($attribute)->map(function ($normalizedScore) use ($scoreToCompareTo) {
@@ -72,6 +91,10 @@ class Matcher implements CanBeSpecified
 
     public function get(): Collection
     {
+        if ($this->specifications()->all()->isEmpty()) {
+            return $this->getCandidates();
+        }
+
         $scores = [];
 
         $this->specifications()->all()->map(function (AttributeScore $attributeScore) {
