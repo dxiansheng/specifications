@@ -9,17 +9,17 @@ use Pbmedia\ScoreMatcher\Interfaces\Score;
 
 interface Specifications
 {
-    public function add(AttributeScore $attributeScore);
+    public function add(AttributeScore $attributeScore): Specifications;
 
-    public function addMany(array $attributeScores = []);
+    public function addMany(array $attributeScores = []): Specifications;
 
-    public function set(Attribute $attribute, Score $score);
+    public function set(Attribute $attribute, Score $score): Specifications;
 
     public function has(Attribute $attribute): bool;
 
     public function get(Attribute $attribute): AttributeScore;
 
-    public function forget(Attribute $attribute);
+    public function forget(Attribute $attribute): Specifications;
 
     public function all(): Collection;
 

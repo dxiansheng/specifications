@@ -18,23 +18,29 @@ class Specifications implements SpecificationsInterface, Countable
         $this->specifications = new Collection;
     }
 
-    public function add(AttributeScore $attributeScore)
+    public function add(AttributeScore $attributeScore): SpecificationsInterface
     {
         $key = $attributeScore->getAttribute()->getIdentifier();
 
         $this->specifications[$key] = $attributeScore;
+
+        return $this;
     }
 
-    public function addMany(array $attributeScores = [])
+    public function addMany(array $attributeScores = []): SpecificationsInterface
     {
         Collection::make($attributeScores)->each(function (AttributeScore $attributeScore) {
             $this->add($attributeScore);
         });
+
+        return $this;
     }
 
-    public function set(Attribute $attribute, Score $score)
+    public function set(Attribute $attribute, Score $score): SpecificationsInterface
     {
         $this->add(new AttributeScore($attribute, $score));
+
+        return $this;
     }
 
     public function has(Attribute $attribute): bool
@@ -51,11 +57,13 @@ class Specifications implements SpecificationsInterface, Countable
         return $this->specifications->get($key);
     }
 
-    public function forget(Attribute $attribute)
+    public function forget(Attribute $attribute): SpecificationsInterface
     {
         $key = $attribute->getIdentifier();
 
         $this->specifications->forget($key);
+
+        return $this;
     }
 
     public function all(): Collection
