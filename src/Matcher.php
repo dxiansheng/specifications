@@ -30,10 +30,14 @@ class Matcher implements CanBeSpecified
 
     public function getScoresByAttribute(Attribute $attribute): Collection
     {
-        return $this->candidates->map(function ($candidate) use ($attribute) {
-            $attributeScore = $candidate->specifications()->get($attribute);
+        return $this->candidates->map(function ($candidate) {
+            return $candidate->specifications();
+        })->map(function ($specifications) use ($attribute) {
+            if (!$specifications->has($attribute)) {
+                return;
+            }
 
-            return $attributeScore ? $attributeScore->getScoreValue() : null;
+            return $specifications->get($attribute)->getScoreValue();
         });
     }
 
