@@ -1,8 +1,8 @@
 <?php
 
-namespace Pbmedia\ScoreMatcher;
+namespace Pbmedia\Specifications;
 
-use Pbmedia\ScoreMatcher\TestSizeInGBScore;
+use Pbmedia\Specifications\TestSizeInGBScore;
 
 class ScoreTest extends \PHPUnit_Framework_TestCase
 {

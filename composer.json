@@ -1,12 +1,13 @@
 {
-    "name": "pbmedia/score-matcher",
+    "name": "pbmedia/specifications",
     "type": "library",
-    "description": "Match scores with object attributes",
+    "description": "Specify objects using attributes and scores",
     "keywords": [
-        "Pbmedia",
-        "ScoreMatcher"
+        "Specificable",
+        "Scores",
+        "Specifications"
     ],
-    "homepage": "https://github.com/pascalbaljetmedia/score-matcher",
+    "homepage": "https://github.com/pascalbaljetmedia/specifications",
     "license": "MIT",
     "authors": [
         {
@@ -27,12 +28,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Pbmedia\\ScoreMatcher\\": "src"
+            "Pbmedia\\Specifications\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Pbmedia\\ScoreMatcher\\": "tests"
+            "Pbmedia\\Specifications\\": "tests"
         }
     },
     "scripts": {

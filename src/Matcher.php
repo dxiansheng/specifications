@@ -1,11 +1,11 @@
 <?php
 
-namespace Pbmedia\ScoreMatcher;
+namespace Pbmedia\Specifications;
 
 use Illuminate\Support\Collection;
-use Pbmedia\ScoreMatcher\Interfaces\Attribute;
-use Pbmedia\ScoreMatcher\Interfaces\CanBeSpecified;
-use Pbmedia\ScoreMatcher\Specifications;
+use Pbmedia\Specifications\Interfaces\Attribute;
+use Pbmedia\Specifications\Interfaces\CanBeSpecified;
+use Pbmedia\Specifications\Specifications;
 
 class Matcher implements CanBeSpecified
 {

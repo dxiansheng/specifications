@@ -1,13 +1,13 @@
 <?php
 
-namespace Pbmedia\ScoreMatcher;
+namespace Pbmedia\Specifications;
 
 use Countable;
 use Illuminate\Support\Collection;
-use Pbmedia\ScoreMatcher\AttributeScore;
-use Pbmedia\ScoreMatcher\Interfaces\Attribute;
-use Pbmedia\ScoreMatcher\Interfaces\Score;
-use Pbmedia\ScoreMatcher\Interfaces\Specifications as SpecificationsInterface;
+use Pbmedia\Specifications\AttributeScore;
+use Pbmedia\Specifications\Interfaces\Attribute;
+use Pbmedia\Specifications\Interfaces\Score;
+use Pbmedia\Specifications\Interfaces\Specifications as SpecificationsInterface;
 
 class Specifications implements SpecificationsInterface, Countable
 {

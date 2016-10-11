@@ -1,11 +1,11 @@
 <?php
 
-namespace Pbmedia\ScoreMatcher\Interfaces;
+namespace Pbmedia\Specifications\Interfaces;
 
 use Illuminate\Support\Collection;
-use Pbmedia\ScoreMatcher\AttributeScore;
-use Pbmedia\ScoreMatcher\Interfaces\Attribute;
-use Pbmedia\ScoreMatcher\Interfaces\Score;
+use Pbmedia\Specifications\AttributeScore;
+use Pbmedia\Specifications\Interfaces\Attribute;
+use Pbmedia\Specifications\Interfaces\Score;
 
 interface Specifications
 {

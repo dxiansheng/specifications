@@ -1,9 +1,9 @@
 <?php
 
-namespace Pbmedia\ScoreMatcher;
+namespace Pbmedia\Specifications;
 
-use Pbmedia\ScoreMatcher\TestCapacityInGBAttribute;
-use Pbmedia\ScoreMatcher\TestSizeInGBScore;
+use Pbmedia\Specifications\TestCapacityInGBAttribute;
+use Pbmedia\Specifications\TestSizeInGBScore;
 
 class AttributeScoreTest extends \PHPUnit_Framework_TestCase
 {

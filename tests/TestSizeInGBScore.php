@@ -1,8 +1,8 @@
 <?php
 
-namespace Pbmedia\ScoreMatcher;
+namespace Pbmedia\Specifications;
 
-use Pbmedia\ScoreMatcher\Interfaces\Score;
+use Pbmedia\Specifications\Interfaces\Score;
 
 class TestSizeInGBScore implements Score
 {

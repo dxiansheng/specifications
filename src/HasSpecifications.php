@@ -1,8 +1,8 @@
 <?php
 
-namespace Pbmedia\ScoreMatcher;
+namespace Pbmedia\Specifications;
 
-use Pbmedia\ScoreMatcher\Interfaces\Specifications as SpecificationsInterface;
+use Pbmedia\Specifications\Interfaces\Specifications as SpecificationsInterface;
 
 trait HasSpecifications
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace Pbmedia\ScoreMatcher;
+namespace Pbmedia\Specifications;
 
-use Pbmedia\ScoreMatcher\Specifications;
-use Pbmedia\ScoreMatcher\TestCacheInGBAttribute;
-use Pbmedia\ScoreMatcher\TestCapacityInGBAttribute;
-use Pbmedia\ScoreMatcher\TestSizeInGBScore;
+use Pbmedia\Specifications\Specifications;
+use Pbmedia\Specifications\TestCacheInGBAttribute;
+use Pbmedia\Specifications\TestCapacityInGBAttribute;
+use Pbmedia\Specifications\TestSizeInGBScore;
 
 class SpecificationsTest extends \PHPUnit_Framework_TestCase
 {

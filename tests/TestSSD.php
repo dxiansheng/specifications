@@ -1,9 +1,9 @@
 <?php
 
-namespace Pbmedia\ScoreMatcher;
+namespace Pbmedia\Specifications;
 
-use Pbmedia\ScoreMatcher\HasSpecifications;
-use Pbmedia\ScoreMatcher\Interfaces\CanBeSpecified;
+use Pbmedia\Specifications\HasSpecifications;
+use Pbmedia\Specifications\Interfaces\CanBeSpecified;
 
 class TestSSD implements CanBeSpecified
 {

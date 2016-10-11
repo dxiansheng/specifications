@@ -1,8 +1,8 @@
 <?php
 
-namespace Pbmedia\ScoreMatcher;
+namespace Pbmedia\Specifications;
 
-use Pbmedia\ScoreMatcher\Interfaces\Attribute;
+use Pbmedia\Specifications\Interfaces\Attribute;
 
 class TestCacheInGBAttribute implements Attribute
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Pbmedia\ScoreMatcher;
+namespace Pbmedia\Specifications;
 
-use Pbmedia\ScoreMatcher\Interfaces\Attribute;
-use Pbmedia\ScoreMatcher\Interfaces\Score;
+use Pbmedia\Specifications\Interfaces\Attribute;
+use Pbmedia\Specifications\Interfaces\Score;
 
 class AttributeScore
 {

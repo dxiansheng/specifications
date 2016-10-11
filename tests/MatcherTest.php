@@ -1,12 +1,12 @@
 <?php
 
-namespace Pbmedia\ScoreMatcher;
+namespace Pbmedia\Specifications;
 
-use Pbmedia\ScoreMatcher\Matcher;
-use Pbmedia\ScoreMatcher\TestCacheInGBAttribute;
-use Pbmedia\ScoreMatcher\TestCapacityInGBAttribute;
-use Pbmedia\ScoreMatcher\TestSizeInGBScore;
-use Pbmedia\ScoreMatcher\TestSSD;
+use Pbmedia\Specifications\Matcher;
+use Pbmedia\Specifications\TestCacheInGBAttribute;
+use Pbmedia\Specifications\TestCapacityInGBAttribute;
+use Pbmedia\Specifications\TestSizeInGBScore;
+use Pbmedia\Specifications\TestSSD;
 
 class MatcherTest extends \PHPUnit_Framework_TestCase
 {

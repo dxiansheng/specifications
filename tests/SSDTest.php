@@ -1,9 +1,9 @@
 <?php
 
-namespace Pbmedia\ScoreMatcher;
+namespace Pbmedia\Specifications;
 
-use Pbmedia\ScoreMatcher\Specifications;
-use Pbmedia\ScoreMatcher\TestSSD;
+use Pbmedia\Specifications\Specifications;
+use Pbmedia\Specifications\TestSSD;
 
 class SSDTest extends \PHPUnit_Framework_TestCase
 {

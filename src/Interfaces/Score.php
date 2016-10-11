@@ -1,6 +1,6 @@
 <?php
 
-namespace Pbmedia\ScoreMatcher\Interfaces;
+namespace Pbmedia\Specifications\Interfaces;
 
 interface Score
 {
