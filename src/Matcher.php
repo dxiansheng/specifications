@@ -5,6 +5,7 @@ namespace Pbmedia\Specifications;
 use Illuminate\Support\Collection;
 use Pbmedia\Specifications\Interfaces\Attribute;
 use Pbmedia\Specifications\Interfaces\CanBeSpecified;
+use Pbmedia\Specifications\Interfaces\Specifications as SpecificationsInterface;
 use Pbmedia\Specifications\Specifications;
 
 class Matcher implements CanBeSpecified
@@ -12,7 +13,7 @@ class Matcher implements CanBeSpecified
     use HasSpecifications;
 
     /**
-     * Instance of Specifications.
+     * Collection instance.
      *
      * @var \Illuminate\Support\Collection
      */
@@ -76,9 +77,9 @@ class Matcher implements CanBeSpecified
      */
     public function getScoresByAttribute(Attribute $attribute): Collection
     {
-        return $this->candidates->map(function ($candidate) {
+        return $this->candidates->map(function (CanBeSpecified $candidate) {
             return $candidate->specifications();
-        })->map(function ($specifications) use ($attribute) {
+        })->map(function (SpecificationsInterface $specifications) use ($attribute) {
             if (!$specifications->has($attribute)) {
                 return;
             }
@@ -153,7 +154,7 @@ class Matcher implements CanBeSpecified
 
         $this->specifications()->all()->map(function (AttributeScore $attributeScore) {
             return $this->getMatchingScoreByAttributeScore($attributeScore);
-        })->each(function ($matchingScoreByAttributeScore) use (&$scores) {
+        })->each(function (Collection $matchingScoreByAttributeScore) use (&$scores) {
             $matchingScoreByAttributeScore->each(function ($score, $productKey) use (&$scores) {
                 if (!isset($scores[$productKey])) {
                     $scores[$productKey] = 0;
