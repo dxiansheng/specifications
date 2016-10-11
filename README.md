@@ -14,9 +14,17 @@ Via Composer
 $ composer require pbmedia/specifications
 ```
 
+## Requirements
+
+* PHP 7.0 and 7.1.
+
+## Implementations
+
+* [Laravel Specifications](https://github.com/pascalbaljetmedia/laravel-specifications)
+
 ## Usage
 
-This package lets you specifiy object, for example products.
+This package lets you specify objects, for example products.
 
 ```php
 use Pbmedia\Specifications\HasSpecifications;
