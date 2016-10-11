@@ -72,7 +72,7 @@ $specifications = $macbookAir->specifications();
 $specifications->set($attribute, $score);
 ```
 
-Take a look at the docblocks of ```Specifications.php``` to see what else you can do with it. This package also comes with a ```Matcher``` service which can sort collections of specificable object based on 'criteria' you provide.
+Take a look at the docblocks of ```Specifications.php``` to see what else you can do with it. This package also comes with a ```Matcher``` service which can sort collections of specificable objects based on 'criteria' you provide.
 
 ```php
 $matcher = new \Pbmedia\Specifications\Matcher;
@@ -110,8 +110,8 @@ If you discover any security related issues, please email pascal@pascalbaljetmed
 
 ## Credits
 
-- [Pascal Baljet][link-author]
-- [All Contributors][link-contributors]
+- [Pascal Baljet](https://github.com/pascalbaljet)
+- [All Contributors](../../contributors)
 
 ## License
 
