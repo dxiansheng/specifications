@@ -14,14 +14,12 @@ class Matcher implements CanBeSpecified
     /**
      * Instance of Specifications.
      *
-     * @var \Pbmedia\Specifications\Interfaces\Specifications
+     * @var \Illuminate\Support\Collection
      */
     protected $candidates;
 
     /**
      * Create a new Matches instance and instantiates a new Collection.
-     *
-     * @return void
      */
     public function __construct()
     {

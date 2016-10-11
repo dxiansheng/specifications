@@ -20,8 +20,6 @@ class Specifications implements SpecificationsInterface, Countable
 
     /**
      * Create a new Specifications instance and instantiates a new Collection.
-     *
-     * @return void
      */
     public function __construct()
     {

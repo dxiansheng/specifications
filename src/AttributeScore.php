@@ -26,7 +26,6 @@ class AttributeScore
      *
      * @param  \Pbmedia\Specifications\Interfaces\Attribute   $attribute
      * @param  \Pbmedia\Specifications\Interfaces\Score   $score
-     * @return void
      */
     public function __construct(Attribute $attribute, Score $score)
     {
