@@ -72,6 +72,24 @@ $specifications = $macbookAir->specifications();
 $specifications->set($attribute, $score);
 ```
 
+Take a look at the docblocks of ```Specifications.php``` to see what else you can do with it. This package also comes with a ```Matcher``` service which can sort collections of specificable object based on 'criteria' you provide.
+
+```php
+$matcher = new \Pbmedia\Specifications\Matcher;
+
+$matcher->addCandidates([
+    $macbookAir, $macbookPro
+]);
+
+// just as a product itself, add 'criteria' to compare against:
+$matcher->specifications()->set(
+    new DiskCapacityInGB, new SizeInGB(512)
+);
+
+// get a collection of notebooks sorted based on which ones are most closely to the criteria.
+$matcher->get();
+```
+
 ## Change log
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
