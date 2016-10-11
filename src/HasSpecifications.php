@@ -17,7 +17,7 @@ trait HasSpecifications
      * Creates a new Specifications object if non exists
      * and returns it.
      *
-     * @return \Pbmedia\Specifications\Interfaces\Specifications
+     * @return \Pbmedia\Specifications\Specifications
      */
     public function specifications(): SpecificationsInterface
     {
