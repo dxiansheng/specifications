@@ -19,7 +19,6 @@ $ composer require pbmedia/specifications
 This package lets you specifiy object, for example products.
 
 ```php
-
 use Pbmedia\Specifications\HasSpecifications;
 use Pbmedia\Specifications\Interfaces\CanBeSpecified;
 
@@ -28,13 +27,11 @@ class NotebookProduct implements CanBeSpecified {
     use HasSpecifications;
 
 }
-
 ```
 
 Set up ```Attribute``` and ```Score``` objects:
 
 ```php
-
 use Pbmedia\Specifications\Interfaces\Attribute;
 use Pbmedia\Specifications\Interfaces\Score;
 
@@ -60,13 +57,11 @@ class SizeInGB implements Score
         return $this->sizeInGB;
     }
 }
-
 ```
 
 Now you can 'specify' you ```NotebookProduct``` like this:
 
 ```php
-
 $macbookAir = new NotebookProduct;
 
 $attribute = new DiskCapacityInGB;
@@ -74,9 +69,7 @@ $score = new SizeInGB(256);
 
 // returns an instance of \Pbmedia\Specifications\Specifications
 $specifications = $macbookAir->specifications();
-
 $specifications->set($attribute, $score);
-
 ```
 
 ## Change log
