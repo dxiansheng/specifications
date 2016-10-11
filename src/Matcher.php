@@ -11,13 +11,29 @@ class Matcher implements CanBeSpecified
 {
     use HasSpecifications;
 
+    /**
+     * Instance of Specifications.
+     *
+     * @var \Pbmedia\Specifications\Interfaces\Specifications
+     */
     protected $candidates;
 
+    /**
+     * Create a new Matches instance and instantiates a new Collection.
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->candidates = new Collection;
     }
 
+    /**
+     * Add an object that implements the CanBeSpecified interface.
+     *
+     * @param  \Pbmedia\Specifications\Interfaces\CanBeSpecified   $candidate
+     * @return $this
+     */
     public function addCandidate(CanBeSpecified $candidate): Matcher
     {
         $this->candidates->push($candidate);
@@ -25,6 +41,12 @@ class Matcher implements CanBeSpecified
         return $this;
     }
 
+    /**
+     * Helper method to add multiple candidates at once.
+     *
+     * @param  mixed   $candidates
+     * @return $this
+     */
     public function addCandidates($candidates): Matcher
     {
         $candidates = is_array($candidates) ? $candidates : func_get_args();
@@ -36,11 +58,24 @@ class Matcher implements CanBeSpecified
         return $this;
     }
 
+    /**
+     * Returns a collection containing all candidates.
+     *
+     * @return \Illuminate\Support\Collection
+     */
     public function getCandidates(): Collection
     {
         return $this->candidates;
     }
 
+    /**
+     * Returns a collection where the keys matches the keys of the
+     * candidates Collection but contain the score of the given
+     * Attribute object.
+     *
+     * @param  \Pbmedia\Specifications\Interfaces\Attribute   $attribute
+     * @return \Illuminate\Support\Collection
+     */
     public function getScoresByAttribute(Attribute $attribute): Collection
     {
         return $this->candidates->map(function ($candidate) {
@@ -54,6 +89,13 @@ class Matcher implements CanBeSpecified
         });
     }
 
+    /**
+     * This method does the same as the 'getScoresByAttribute' method
+     * but has the scores normalized.
+     *
+     * @param  \Pbmedia\Specifications\Interfaces\Attribute   $attribute
+     * @return \Illuminate\Support\Collection
+     */
     public function getNormalizedScoresByAttribute(Attribute $attribute): Collection
     {
         $scores = $this->getScoresByAttribute($attribute);
@@ -65,6 +107,14 @@ class Matcher implements CanBeSpecified
         });
     }
 
+    /**
+     * Returns a collection where the keys matches the keys of the
+     * candidates Collection but contain the normalized score compaired
+     * to the given AttributeScore.
+     *
+     * @param  \Pbmedia\Specifications\AttributeScore  $attributeScore
+     * @return \Illuminate\Support\Collection
+     */
     public function getMatchingScoreByAttributeScore(AttributeScore $attributeScore): Collection
     {
         $attribute  = $attributeScore->getAttribute();
@@ -89,6 +139,12 @@ class Matcher implements CanBeSpecified
         });
     }
 
+    /**
+     * Returns a collection where the candidaties are sorted based
+     * on how close they are to the specifications.
+     *
+     * @return \Illuminate\Support\Collection
+     */
     public function get(): Collection
     {
         if ($this->specifications()->all()->isEmpty()) {
